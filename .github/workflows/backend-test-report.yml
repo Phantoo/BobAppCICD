@@ -23,7 +23,7 @@ jobs:
 
       - name: Run Tests
         working-directory: back
-        run: mvn -B test --file pom.xml
+        run: mvn surefire:test
 
       - name: Test Report Generation
         uses: phoenix-actions/test-reporting@v9
@@ -31,5 +31,5 @@ jobs:
         if: success() || failure()
         with:
           name: JUnit Tests
-          path: target/site/jacoco/jacoco.xml
+          path: target/site/surefire-reports/*.xml
           reporter: java-junit

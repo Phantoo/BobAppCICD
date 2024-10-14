@@ -17,15 +17,15 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Run Maven verify
+      - name: Run Tests
         working-directory: back
-        run: mvn --batch-mode --update-snapshots verify
+        run: mvn test
 
-      - name: Test Report
+      - name: Test Report Generation
         uses: phoenix-actions/test-reporting@v9
         id: test-report
         if: success() || failure()
         with:
           name: JUnit Tests
-          path: reports/junit-*.xml
+          path: target/site/jacoco/jacoco.xml
           reporter: java-junit

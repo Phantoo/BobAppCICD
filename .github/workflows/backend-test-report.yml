@@ -19,7 +19,7 @@ jobs:
 
       - name: Build Project
         working-directory: back
-        run: mvn -B package --file pom.xml
+        run: mvn -B compile --file pom.xml
 
       - name: Run Tests
         working-directory: back
@@ -31,4 +31,5 @@ jobs:
         if: success() || failure()
         with:
           name: JUnit Tests
+          path: target/site/jacoco/jacoco.xml
           reporter: java-junit

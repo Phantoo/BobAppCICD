@@ -1,0 +1,26 @@
+name: Frontend Build & Tests
+on:
+  pull_request:
+  push:
+jobs:
+  build-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        working-directory: front
+        run: npm ci
+
+      - name: Run Tests
+        working-directory: front
+        run: npm test
+
+      - name: Test Summary
+        uses: phoenix-actions/test-reporting@v9
+        if: success() || failure()
+        with:
+          path: reports/report.xml
+          reporter: jest-junit

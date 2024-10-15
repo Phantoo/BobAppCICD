@@ -1,4 +1,4 @@
-name: Backend Tests
+name: Backend Build & Tests
 on:
   pull_request:
   push:
@@ -17,16 +17,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build Project
+      - name: Build
         working-directory: back
-        id: build-job
         run: mvn -B compile --file pom.xml
-
-      - run: "echo "### :white_check_mark: Build Passed" >> $GITHUB_STEP_SUMMARY"
-        if: steps.build-job.result == 'success'
-
-      - run: "echo "### :x: Build Failed" >> $GITHUB_STEP_SUMMARY"
-        if: steps.build-job.result == 'failure'
 
       - name: Run Tests
         working-directory: back
@@ -37,12 +30,3 @@ jobs:
         with:
           paths: "**/TEST-*.xml"
         if: success() || failure()
-
-    #   - name: Test Report Generation
-    #     uses: phoenix-actions/test-reporting@v9
-    #     id: test-report
-    #     if: success() || failure()
-    #     with:
-    #       name: JUnit Tests
-    #       path: back/target/surefire-reports/*.xml
-    #       reporter: java-junit

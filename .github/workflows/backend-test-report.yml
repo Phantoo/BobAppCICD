@@ -19,7 +19,14 @@ jobs:
 
       - name: Build Project
         working-directory: back
+        id: build-job
         run: mvn -B compile --file pom.xml
+
+      - run: "echo "### :white_check_mark: Build Passed" >> $GITHUB_STEP_SUMMARY"
+        if: jobs.build-job.result == 'success'
+
+      - run: "echo "### :x: Build Failed" >> $GITHUB_STEP_SUMMARY"
+        if: jobs.build-job.result == 'failure'
 
       - name: Run Tests
         working-directory: back

@@ -23,13 +23,19 @@ jobs:
 
       - name: Run Tests
         working-directory: back
-        run: mvn surefire:test
+        run: mvn -B test --file pom.xml
 
-      - name: Test Report Generation
-        uses: phoenix-actions/test-reporting@v9
-        id: test-report
-        if: success() || failure()
+      - name: Test Summary
+        uses: test-summary/action@v2
         with:
-          name: JUnit Tests
-          path: back/target/surefire-reports/*.xml
-          reporter: java-junit
+          paths: "**/TEST-*.xml"
+        if: success() || failure()
+
+    #   - name: Test Report Generation
+    #     uses: phoenix-actions/test-reporting@v9
+    #     id: test-report
+    #     if: success() || failure()
+    #     with:
+    #       name: JUnit Tests
+    #       path: back/target/surefire-reports/*.xml
+    #       reporter: java-junit

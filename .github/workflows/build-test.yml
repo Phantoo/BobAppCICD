@@ -4,7 +4,7 @@ on:
   push:
 jobs:
   backend-build-test:
-    name: Backend Build & Test
+    name: Backend
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -40,7 +40,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
   
   frontend-build-test:
-    name: Frontend Build & Test
+    name: Frontend
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -53,3 +53,8 @@ jobs:
       - name: Run Tests
         working-directory: front
         run: npm test -- --browsers=ChromeHeadless --watch=false --code-coverage
+
+      - name: Coverage Summary
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+          filename: front/coverage/bobapp/cobertura-coverage.xml

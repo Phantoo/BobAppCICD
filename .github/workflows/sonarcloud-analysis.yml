@@ -18,7 +18,7 @@ jobs:
           projectBaseDir: back/
           
   sonarcloudScan2:
-    name: SonarCloudScan2
+    name: Frontend Analysis
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

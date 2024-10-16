@@ -38,13 +38,17 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Phantoo_BobAppCICD
           
-  sonarcloudScan2:
+  frontend-sonarcloud-scan:
     name: Frontend Analysis
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  
+
+      - name: Run Tests
+        working-directory: front
+        run: npm test -- --browsers=ChromeHeadless --watch=false --code-coverage
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master

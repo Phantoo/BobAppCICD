@@ -38,6 +38,7 @@ jobs:
           coverage_report_title: 'Backend test coverage result'
           coverage_report_name: 'Backend test coverage result'
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_only_summary: true
   
   frontend-build-test:
     name: Frontend

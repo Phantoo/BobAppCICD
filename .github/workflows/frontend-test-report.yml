@@ -16,7 +16,7 @@ jobs:
 
       - name: Run Tests
         working-directory: front
-        run: npm test --browsers=ChromeHeadless --watch=false --code-coverage
+        run: npm test -- --browsers=ChromeHeadless --watch=false --code-coverage
 
       # NE MARCHE PAS
       # - name: Test Summary

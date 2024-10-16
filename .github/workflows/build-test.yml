@@ -31,14 +31,22 @@ jobs:
           paths: "**/TEST-*.xml"
         if: success() || failure()
 
-      - name: Coverage Summary
+      - name: Upload Coverage Result
         uses: PavanMudigonda/jacoco-reporter@v5.0
         with:
           coverage_results_path: 'back/target/site/jacoco/jacoco.xml'
-          coverage_report_title: 'Backend test coverage result'
-          coverage_report_name: 'Backend test coverage result'
+          coverage_report_title: 'Backend coverage result details'
+          coverage_report_name: 'Backend coverage result details'
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_only_summary: true
+
+      - name: Coverage Summary
+        run: |
+          echo "| Outcome | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "| --- | --- |" >> $GITHUB_STEP_SUMMARY
+          echo "| Code Coverage % | ${{ steps.jacoco_reporter.outputs.coverage_percentage }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| :heavy_check_mark: Number of Lines Covered | ${{ steps.jacoco_reporter.outputs.covered_lines }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| :x: Number of Lines Missed | ${{ steps.jacoco_reporter.outputs.missed_lines }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Total Number of Lines | ${{ steps.jacoco_reporter.outputs.total_lines }} |" >> $GITHUB_STEP_SUMMARY
   
   frontend-build-test:
     name: Frontend

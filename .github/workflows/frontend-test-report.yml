@@ -18,9 +18,11 @@ jobs:
         working-directory: front
         run: npm test
 
-      - name: Test Summary
-        uses: phoenix-actions/test-reporting@v9
-        if: success() || failure()
-        with:
-          path: reports/report.xml
-          reporter: jest-junit
+      # NE MARCHE PAS
+      # - name: Test Summary
+      #   uses: phoenix-actions/test-reporting@v9
+      #   if: success() || failure()
+      #   with:
+      #     name
+      #     path: reports/report.xml
+      #     reporter: jest-junit

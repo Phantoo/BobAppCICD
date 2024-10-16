@@ -30,3 +30,11 @@ jobs:
         with:
           paths: "**/TEST-*.xml"
         if: success() || failure()
+
+      - name: Coverage Summary
+        uses: PavanMudigonda/jacoco-reporter@v5
+        with:
+          coverage_results_path: 'back/target/site/jacoco/jacoco.xml'
+          coverage_report_title: 'Backend test coverage results'
+          coverage_report_name: 'Backend test coverage results'
+          github_token: ${{ secrets.GITHUB_TOKEN }}

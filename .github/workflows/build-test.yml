@@ -32,6 +32,7 @@ jobs:
         if: success() || failure()
 
       - name: Upload Coverage Result
+        id: jacoco_reporter
         uses: PavanMudigonda/jacoco-reporter@v5.0
         with:
           coverage_results_path: 'back/target/site/jacoco/jacoco.xml'

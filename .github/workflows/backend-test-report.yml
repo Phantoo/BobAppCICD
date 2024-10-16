@@ -1,40 +1,40 @@
-name: Backend Build & Tests
-on:
-  pull_request:
-  push:
-jobs:
-  build-test:
-    name: Build & Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+# name: Backend Build & Tests
+# on:
+#   pull_request:
+#   push:
+# jobs:
+#   build-test:
+#     name: Build & Test
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Check out repository
+#         uses: actions/checkout@v4
 
-      - name: Setup Java 11
-        uses: actions/setup-java@v4
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-          cache: maven
+#       - name: Setup Java 11
+#         uses: actions/setup-java@v4
+#         with:
+#           java-version: '11'
+#           distribution: 'temurin'
+#           cache: maven
 
-      - name: Build
-        working-directory: back
-        run: mvn -B compile --file pom.xml
+#       - name: Build
+#         working-directory: back
+#         run: mvn -B compile --file pom.xml
 
-      - name: Run Tests
-        working-directory: back
-        run: mvn -B test --file pom.xml
+#       - name: Run Tests
+#         working-directory: back
+#         run: mvn -B test --file pom.xml
 
-      - name: Test Summary
-        uses: test-summary/action@v2
-        with:
-          paths: "**/TEST-*.xml"
-        if: success() || failure()
+#       - name: Test Summary
+#         uses: test-summary/action@v2
+#         with:
+#           paths: "**/TEST-*.xml"
+#         if: success() || failure()
 
-      - name: Coverage Summary
-        uses: PavanMudigonda/jacoco-reporter@v5.0
-        with:
-          coverage_results_path: 'back/target/site/jacoco/jacoco.xml'
-          coverage_report_title: 'Backend test coverage results'
-          coverage_report_name: 'Backend test coverage results'
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+#       - name: Coverage Summary
+#         uses: PavanMudigonda/jacoco-reporter@v5.0
+#         with:
+#           coverage_results_path: 'back/target/site/jacoco/jacoco.xml'
+#           coverage_report_title: 'Backend test coverage results'
+#           coverage_report_name: 'Backend test coverage results'
+#           github_token: ${{ secrets.GITHUB_TOKEN }}

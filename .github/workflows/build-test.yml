@@ -73,5 +73,5 @@ jobs:
           indicators: true
           output: both
 
-      - name: Print coverage summary
+      - name: Print Coverage Summary
         run: cat code-coverage-results.md > $GITHUB_STEP_SUMMARY

@@ -7,8 +7,12 @@ on:
 
 jobs:
   backend-docker-upload:
+    name: Backend
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.1
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3.2.0
 
@@ -27,11 +31,14 @@ jobs:
           push: true
           tags: phantoo/ocr10-cicd-backend:latest
           context: ./back/
-          file: ./back/Dockerfile
 
   frontend-docker-upload:
+    name: Frontend
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.1
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3.2.0
 
@@ -50,4 +57,3 @@ jobs:
           push: true
           tags: phantoo/ocr10-cicd-frontend:latest
           context: ./front/
-          file: ./front/Dockerfile

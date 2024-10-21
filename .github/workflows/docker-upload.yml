@@ -26,7 +26,8 @@ jobs:
         with:
           push: true
           tags: phantoo/ocr10-cicd-backend:latest
-          context: back/
+          context: ./back/
+          file: ./back/Dockerfile
 
   frontend-docker-upload:
     runs-on: ubuntu-latest
@@ -48,4 +49,5 @@ jobs:
         with:
           push: true
           tags: phantoo/ocr10-cicd-frontend:latest
-          context: front/
+          context: ./front/
+          file: ./front/Dockerfile

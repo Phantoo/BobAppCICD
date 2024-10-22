@@ -4,7 +4,7 @@ on:
   push:
 jobs:
   backend-sonarcloud-scan:
-    name: Backend Analysis
+    name: Backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,7 +39,7 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=phantoo_BobAppCICD_backend -Dsonar.projectName=phantoo_BobAppCICD_backend
           
   frontend-sonarcloud-scan:
-    name: Frontend Analysis
+    name: Frontend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

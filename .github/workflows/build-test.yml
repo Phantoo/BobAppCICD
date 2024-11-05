@@ -1,7 +1,6 @@
 name: Builds & Tests
 on:
   pull_request:
-  push:
 jobs:
   backend-build-test:
     name: Backend

@@ -1,7 +1,6 @@
 name: SonarCloud Analysis
 on:
   pull_request:
-  push:
 jobs:
   backend-sonarcloud-scan:
     name: Backend
